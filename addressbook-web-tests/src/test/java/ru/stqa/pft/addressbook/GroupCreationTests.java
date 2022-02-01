@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook;
 
-import java.util.concurrent.TimeUnit;
-
+import java.time.Duration;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,9 +12,18 @@ public class GroupCreationTests {
     public void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver", "C:/Windows/System32/chromedriver.exe");
         wd = new ChromeDriver();
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         wd.get("http://localhost/addressbook/");
         login("admin", "secret");
+    }
+
+    @Test
+    public void testGroupCreation() throws Exception {
+        gotoGroupPage();
+        initGroupCreation();
+        fillGroupForm(new GroupData("Тестовая", "Тестовая2", "Тестовая3"));
+        submitGroupCreation();
+        returnGroupPage();
     }
 
     private void login(String username, String password) {
@@ -27,21 +35,12 @@ public class GroupCreationTests {
         wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    @Test
-    public void testGroupCreation() throws Exception {
-        gotoGroupPage();
-        initGroupCreation();
-        fillGroupForm(new GroupData("test1", "test2", "test3"));
-        submitGroupCreation();
-        returnGroupPage();
+    private void gotoGroupPage() {
+        wd.findElement(By.linkText("groups")).click();
     }
 
-    private void returnGroupPage() {
-        wd.findElement(By.linkText("group page")).click();
-    }
-
-    private void submitGroupCreation() {
-        wd.findElement(By.name("submit")).click();
+    private void initGroupCreation() {
+        wd.findElement(By.name("new")).click();
     }
 
     private void fillGroupForm(GroupData groupData) {
@@ -56,12 +55,12 @@ public class GroupCreationTests {
         wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
     }
 
-    private void initGroupCreation() {
-        wd.findElement(By.name("new")).click();
+    private void submitGroupCreation() {
+        wd.findElement(By.name("submit")).click();
     }
 
-    private void gotoGroupPage() {
-        wd.findElement(By.linkText("groups")).click();
+    private void returnGroupPage() {
+        wd.findElement(By.linkText("group page")).click();
     }
 
     @AfterMethod(alwaysRun = true)
