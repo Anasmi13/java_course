@@ -8,14 +8,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ContactCreationTests {
-  private WebDriver dw;
+  private WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     System.setProperty("webdriver.chrome.driver", "C:/Windows/System32/chromedriver.exe");
-    dw = new ChromeDriver();
-    dw.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-    dw.get("http://localhost/addressbook/");
+    wd = new ChromeDriver();
+    wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+    wd.get("http://localhost/addressbook/");
     login("admin", "secret");
   }
 
@@ -29,72 +29,72 @@ public class ContactCreationTests {
 
   private void login(String username, String password) {
 
-    dw.findElement(By.name("user")).click();
-    dw.findElement(By.name("user")).clear();
-    dw.findElement(By.name("user")).sendKeys(username);
-    dw.findElement(By.name("pass")).click();
-    dw.findElement(By.name("pass")).clear();
-    dw.findElement(By.name("pass")).sendKeys(password);
-    dw.findElement(By.xpath("//input[@value='Login']")).click();
+    wd.findElement(By.name("user")).click();
+    wd.findElement(By.name("user")).clear();
+    wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("pass")).clear();
+    wd.findElement(By.name("pass")).sendKeys(password);
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   private void initContactCreation() {
-    dw.findElement(By.linkText("add new")).click();
+    wd.findElement(By.linkText("add new")).click();
   }
 
   private void fillContactForm(ContactData contactData) {
-    dw.findElement(By.name("firstname")).click();
-    dw.findElement(By.name("firstname")).clear();
-    dw.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
-    dw.findElement(By.name("middlename")).click();
-    dw.findElement(By.name("middlename")).clear();
-    dw.findElement(By.name("middlename")).sendKeys(contactData.getMiddlename());
-    dw.findElement(By.name("lastname")).click();
-    dw.findElement(By.name("lastname")).clear();
-    dw.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
-    dw.findElement(By.name("company")).click();
-    dw.findElement(By.name("company")).clear();
-    dw.findElement(By.name("company")).sendKeys(contactData.getCompany());
-    dw.findElement(By.name("address")).click();
-    dw.findElement(By.name("address")).clear();
-    dw.findElement(By.name("address")).sendKeys(contactData.getAddress());
-    dw.findElement(By.name("mobile")).click();
-    dw.findElement(By.name("mobile")).clear();
-    dw.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
-    dw.findElement(By.name("email")).click();
-    dw.findElement(By.name("email")).clear();
-    dw.findElement(By.name("email")).sendKeys(contactData.getEmail());
-    dw.findElement(By.name("bday")).click();
-    new Select(dw.findElement(By.name("bday"))).selectByVisibleText(contactData.getBday());
-    dw.findElement(By.name("bmonth")).click();
-    new Select(dw.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
-    dw.findElement(By.name("byear")).click();
-    dw.findElement(By.name("byear")).clear();
-    dw.findElement(By.name("byear")).sendKeys(contactData.getByear());
-    dw.findElement(By.name("new_group")).click();
-    new Select(dw.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    dw.findElement(By.name("address2")).click();
-    dw.findElement(By.name("address2")).clear();
-    dw.findElement(By.name("address2")).sendKeys(contactData.getAddress2());
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
+    wd.findElement(By.name("middlename")).click();
+    wd.findElement(By.name("middlename")).clear();
+    wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddlename());
+    wd.findElement(By.name("lastname")).click();
+    wd.findElement(By.name("lastname")).clear();
+    wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
+    wd.findElement(By.name("company")).click();
+    wd.findElement(By.name("company")).clear();
+    wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
+    wd.findElement(By.name("address")).click();
+    wd.findElement(By.name("address")).clear();
+    wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
+    wd.findElement(By.name("mobile")).click();
+    wd.findElement(By.name("mobile")).clear();
+    wd.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+    wd.findElement(By.name("bday")).click();
+    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getBday());
+    wd.findElement(By.name("bmonth")).click();
+    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
+    wd.findElement(By.name("byear")).click();
+    wd.findElement(By.name("byear")).clear();
+    wd.findElement(By.name("byear")).sendKeys(contactData.getByear());
+    wd.findElement(By.name("new_group")).click();
+    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    wd.findElement(By.name("address2")).click();
+    wd.findElement(By.name("address2")).clear();
+    wd.findElement(By.name("address2")).sendKeys(contactData.getAddress2());
   }
 
   private void submitContactCreation() {
-    dw.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
   private void returnHomePage() {
-    dw.findElement(By.linkText("home page")).click();
+    wd.findElement(By.linkText("home page")).click();
   }
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
-    dw.findElement(By.linkText("Logout")).click();
-    dw.quit();
+    wd.findElement(By.linkText("Logout")).click();
+    wd.quit();
   }
 
   private boolean isElementPresent(By by) {
     try {
-      dw.findElement(by);
+      wd.findElement(by);
       return true;
     } catch (NoSuchElementException e) {
       return false;
@@ -103,7 +103,7 @@ public class ContactCreationTests {
 
   private boolean isAlertPresent() {
     try {
-      dw.switchTo().alert();
+      wd.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
       return false;
