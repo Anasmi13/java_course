@@ -71,8 +71,6 @@ public class ContactCreationTests {
     wd.findElement(By.name("byear")).click();
     wd.findElement(By.name("byear")).clear();
     wd.findElement(By.name("byear")).sendKeys(contactData.getByear());
-    wd.findElement(By.name("new_group")).click();
-    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     wd.findElement(By.name("address2")).click();
     wd.findElement(By.name("address2")).clear();
     wd.findElement(By.name("address2")).sendKeys(contactData.getAddress2());
