@@ -22,7 +22,7 @@ public class ContactCreationTests {
   @Test
   public void testContactCreation() throws Exception {
     initContactCreation();
-    fillContactForm(new ContactData("Сергей", "Александрович", "Меньшов", "Рога и копыта", "г. Москва, ул. Советская 4, офис 410", "89456582355", "menshov_am_85@mail.ru", "15", "April", "1985", "Тестовая", "г. Москва ул. Невельская, кв.306"));
+    fillContactForm(new ContactData("Сергей", "Александрович", "Меньшов", "Рога и копыта", "г. Москва, ул. Советская 4, офис 410", "89456582355", "menshov_am_85@mail.ru", "15", "April", "1985", "г. Москва ул. Невельская, кв.306"));
     submitContactCreation();
     returnHomePage();
   }
@@ -71,8 +71,6 @@ public class ContactCreationTests {
     wd.findElement(By.name("byear")).click();
     wd.findElement(By.name("byear")).clear();
     wd.findElement(By.name("byear")).sendKeys(contactData.getByear());
-    wd.findElement(By.name("new_group")).click();
-    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     wd.findElement(By.name("address2")).click();
     wd.findElement(By.name("address2")).clear();
     wd.findElement(By.name("address2")).sendKeys(contactData.getAddress2());
