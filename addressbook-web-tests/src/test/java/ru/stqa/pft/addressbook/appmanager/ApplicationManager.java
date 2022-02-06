@@ -39,7 +39,7 @@ public class ApplicationManager {
             System.setProperty("webdriver.edge.driver", "C:/Windows/System32/msedgedriver.exe");
             wd = new EdgeDriver();
         }
-        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         contactHelper = new ContactHelper(wd);
