@@ -13,6 +13,9 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
+    private NavigationHelper navigationHelper;
+    private GroupHelper groupHelper;
+
     public void initContactCreation() {
         click(By.linkText("add new"));
     }
@@ -72,6 +75,17 @@ public class ContactHelper extends HelperBase {
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createContactWithPrecondition(GroupData group, ContactData contact) {
+        //Проверить, есть ли группа перед созданием контакта
+        groupHelper = new GroupHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
+        navigationHelper.gotoGroupPage();
+        if (! groupHelper.isThereAGroup()) {
+            groupHelper.createGroup(group);
+        }
+        createContact(contact, true);
     }
 
 }
