@@ -77,13 +77,13 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createContactWithPrecondition(GroupData group, ContactData contact) {
+    public void createContactWithPrecondition(ContactData contact) {
         //Проверить, есть ли группа перед созданием контакта
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         navigationHelper.gotoGroupPage();
         if (! groupHelper.isThereAGroup()) {
-            groupHelper.createGroup(group);
+            groupHelper.createGroup(new GroupData(contact.getGroup(), null, null));
         }
         createContact(contact, true);
     }
