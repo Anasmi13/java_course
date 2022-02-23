@@ -2,10 +2,14 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -49,8 +53,8 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("home page"));
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteSelectedContacts() {
@@ -59,16 +63,19 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initContactModification() {
-        click(By.xpath("//img[@alt='Edit']"));
+        List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
+        List<WebElement> cells = elements.get(elements.size() - 1).findElements(By.tagName("td"));
+       cells.get(7).click();
+
     }
 
     public void submitContactModification() {
         click(By.name("update"));
     }
 
-    public void createContact(ContactData contact, boolean creation) {
+    public void createContact(ContactData contact) {
         initContactCreation();
-        fillContactForm(contact, creation);
+        fillContactForm(contact, true);
         submitContactCreation();
         returnHomePage();
     }
@@ -82,10 +89,28 @@ public class ContactHelper extends HelperBase {
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         navigationHelper.gotoGroupPage();
-        if (! groupHelper.isThereAGroup()) {
+        if (! groupHelper.isThereAGroupName(contact.getGroup())) {
             groupHelper.createGroup(new GroupData(contact.getGroup(), null, null));
         }
-        createContact(contact, true);
+        createContact(contact);
     }
 
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
+        for (WebElement element : elements) {
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            String lastname = cells.get(1).getText();
+            String firstname = cells.get(2).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, null, null, null, null, null,null);
+
+            contacts.add(contact);
+        }
+        return contacts;
+    }
 }

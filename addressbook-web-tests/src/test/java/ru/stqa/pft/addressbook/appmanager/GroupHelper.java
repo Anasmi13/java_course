@@ -74,4 +74,15 @@ public class GroupHelper extends HelperBase{
         }
         return groups;
     }
+
+    public boolean isThereAGroupName(String name) {
+        List<GroupData> groups = new ArrayList<GroupData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element : elements) {
+            if (name.equals(element.getText())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
