@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletion() throws Exception {
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContactWithPrecondition(new ContactData("Сергей", "Александрович", "Меньшов", "Рога и копыта", "г. Москва, ул. Советская 4, офис 410", "89456582355", "menshov_am_85@mail.ru", "15", "April", "1985", "Тестовая","г. Москва ул. Невельская, кв.306"));
@@ -16,7 +16,7 @@ public class ContactDeletionTests extends TestBase {
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteSelectedContacts();
-        app.getNavigationHelper().gotoHomePage();
+        app.goTo().gotoHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
 

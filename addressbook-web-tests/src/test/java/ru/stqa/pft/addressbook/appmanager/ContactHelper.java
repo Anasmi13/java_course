@@ -88,9 +88,9 @@ public class ContactHelper extends HelperBase {
         //Проверить, есть ли группа перед созданием контакта
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
-        navigationHelper.gotoGroupPage();
+        navigationHelper.groupPage();
         if (! groupHelper.isThereAGroupName(contact.getGroup())) {
-            groupHelper.createGroup(new GroupData(contact.getGroup(), null, null));
+            groupHelper.create(new GroupData().withName(contact.getGroup()));
         }
         createContact(contact);
     }

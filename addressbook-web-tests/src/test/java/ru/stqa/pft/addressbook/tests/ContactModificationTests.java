@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactModification() {
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContactWithPrecondition(new ContactData("Сергей", "Александрович", "Меньшов", "Рога и копыта", "г. Москва, ул. Советская 4, офис 410", "89456582355", "menshov_am_85@mail.ru", "15", "April", "1985", "Тестовая","г. Москва ул. Невельская, кв.306"));
@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
         ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Александр", "Сергеевич", "Меньшов", "Рога и копыта", "г. Москва, ул. Советская 4, офис 410", "89456582355", "menshov_am_85@mail.ru", "15", "April", "1985", null,"г. Москва ул. Невельская, кв.306");
         app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModification();
-        app.getNavigationHelper().gotoHomePage();
+        app.goTo().gotoHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 
