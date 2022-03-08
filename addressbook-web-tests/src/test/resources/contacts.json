@@ -1,0 +1,47 @@
+[
+  {
+    "firstname": "Сергей 0",
+    "middlename": "Александрович 0",
+    "lastname": "Меньшов 0",
+    "company": "Рога и копыта 0",
+    "address": "г. Москва, ул. Советская 4, офис 410",
+    "homePhone": "253670",
+    "mobilePhone": "89456582350",
+    "workPhone": "554960",
+    "email": "menshov_am_80@mail.ru",
+    "email2": "menshov_80@mail.ru",
+    "email3": "menshov_am80@mail.ru",
+    "address2": "г. Москва ул. Невельская, кв.300",
+    "homePhone2": "265350"
+  },
+  {
+    "firstname": "Сергей 1",
+    "middlename": "Александрович 1",
+    "lastname": "Меньшов 1",
+    "company": "Рога и копыта 1",
+    "address": "г. Москва, ул. Советская 4, офис 411",
+    "homePhone": "253671",
+    "mobilePhone": "89456582351",
+    "workPhone": "554961",
+    "email": "menshov_am_81@mail.ru",
+    "email2": "menshov_81@mail.ru",
+    "email3": "menshov_am81@mail.ru",
+    "address2": "г. Москва ул. Невельская, кв.301",
+    "homePhone2": "265351"
+  },
+  {
+    "firstname": "Сергей 2",
+    "middlename": "Александрович 2",
+    "lastname": "Меньшов 2",
+    "company": "Рога и копыта 2",
+    "address": "г. Москва, ул. Советская 4, офис 412",
+    "homePhone": "253672",
+    "mobilePhone": "89456582352",
+    "workPhone": "554962",
+    "email": "menshov_am_82@mail.ru",
+    "email2": "menshov_82@mail.ru",
+    "email3": "menshov_am82@mail.ru",
+    "address2": "г. Москва ул. Невельская, кв.302",
+    "homePhone2": "265352"
+  }
+]
