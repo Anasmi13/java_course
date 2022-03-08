@@ -1,0 +1,17 @@
+<list>
+  <group>
+    <name>Тестовая 0</name>
+    <header>Тест 0</header>
+    <footer>Test 0</footer>
+  </group>
+  <group>
+    <name>Тестовая 1</name>
+    <header>Тест 1</header>
+    <footer>Test 1</footer>
+  </group>
+  <group>
+    <name>Тестовая 2</name>
+    <header>Тест 2</header>
+    <footer>Test 2</footer>
+  </group>
+</list>
