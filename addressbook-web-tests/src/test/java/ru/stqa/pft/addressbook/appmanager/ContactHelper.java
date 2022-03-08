@@ -39,7 +39,6 @@ public class ContactHelper extends HelperBase {
         typeSelect(By.name("bday"), contactData.getBday());
         typeSelect(By.name("bmonth"), contactData.getBmonth());
         type(By.name("byear"), contactData.getByear());
-        attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -48,6 +47,8 @@ public class ContactHelper extends HelperBase {
         }
 
         type(By.name("address2"), contactData.getAddress2());
+        type(By.name("phone2"), contactData.getHomePhone2());
+        attach(By.name("photo"), contactData.getPhoto());
     }
 
     public void submitContactCreation() {
@@ -141,10 +142,11 @@ public class ContactHelper extends HelperBase {
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
+        String home2 = wd.findElement(By.name("phone2")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
                 .withAddress(address).withEmail(email).withEmail2(email2).withEmail3(email3)
-                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withHomePhone2(home2);
 
     }
 

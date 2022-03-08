@@ -24,6 +24,7 @@ public class ContactData {
     private String byear;
     private String group;
     private String address2;
+    private String homePhone2;
     private File photo;
 
     public ContactData withId(int id) {
@@ -121,6 +122,11 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withHomePhone2(String homePhone2) {
+        this.homePhone2 = homePhone2;
+        return this;
+    }
+
     public ContactData withPhoto(File photo) {
         this.photo = photo;
         return this;
@@ -200,6 +206,10 @@ public class ContactData {
 
     public String getAddress2() {
         return address2;
+    }
+
+    public String getHomePhone2() {
+        return homePhone2;
     }
 
     public File getPhoto() {
