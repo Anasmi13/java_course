@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Тестовая 0",
+    "header": "Тест 0",
+    "footer": "Test 0"
+  },
+  {
+    "name": "Тестовая 1",
+    "header": "Тест 1",
+    "footer": "Test 1"
+  },
+  {
+    "name": "Тестовая 2",
+    "header": "Тест 2",
+    "footer": "Test 2"
+  }
+]
