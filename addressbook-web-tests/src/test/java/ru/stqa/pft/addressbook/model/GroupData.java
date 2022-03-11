@@ -16,6 +16,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "group_list")
 public class GroupData {
+
     @XStreamOmitField
     @Id
     @Column(name = "group_id")
