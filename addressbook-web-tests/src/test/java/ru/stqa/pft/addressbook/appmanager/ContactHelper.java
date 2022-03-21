@@ -41,7 +41,11 @@ public class ContactHelper extends HelperBase {
         type(By.name("byear"), contactData.getByear());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group")))
+                        .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -104,16 +108,6 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public void createContactWithPrecondition(ContactData contact) {
-        groupHelper = new GroupHelper(wd);
-        navigationHelper = new NavigationHelper(wd);
-        navigationHelper.groupPage();
-        if (! groupHelper.isThereAGroupName(contact.getGroup())) {
-            groupHelper.create(new GroupData().withName(contact.getGroup()));
-        }
-        createContact(contact);
-    }
-
     public Contacts all() {
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
@@ -148,6 +142,36 @@ public class ContactHelper extends HelperBase {
                 .withAddress(address).withEmail(email).withEmail2(email2).withEmail3(email3)
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withHomePhone2(home2);
 
+    }
+
+    public void addContactToGroup(ContactData addContact, GroupData group) {
+        selectContactById(addContact.getId());
+        setGroupToAddById(group.getId());
+        addToContactToGroup();
+    }
+
+    private void setGroupToAddById(int id) {
+        click(By.name("to_group"));
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(id));
+    }
+
+    private void addToContactToGroup() {
+        click(By.name("add"));
+    }
+
+    public void deleteContactFromGroup(ContactData deleteContact, GroupData group) {
+        setGroupToDeleteById(group.getId());
+        selectContactById(deleteContact.getId());
+        submitRemoveFromGroup();
+    }
+
+    private void setGroupToDeleteById(int id) {
+        click(By.name("to_group"));
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(id));
+    }
+
+    private void submitRemoveFromGroup() {
+        click(By.name("remove"));
     }
 
 }

@@ -9,11 +9,9 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
-public class ContactDeletionTests extends TestBase {
+public class DeleteContactFromGroup extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -31,17 +29,20 @@ public class ContactDeletionTests extends TestBase {
                     .withBday("15").withBmonth("April").withByear("1985").inGroup(groups.iterator().next())
                     .withAddress2("г. Москва ул. Невельская, кв.306").withHomePhone2("265358").withPhoto(photo));
         }
+        if (app.db().contactsInGroup().size() == 0) {
+            app.goTo().gotoHomePage();
+            app.contact().addContactToGroup(app.db().contacts().iterator().next(), app.db().groups().iterator().next());
+        }
     }
 
     @Test
-    public void testContactDeletion() throws Exception {
-        Contacts before = app.db().contacts();
-        ContactData deletedContact = before.iterator().next();
-        app.contact().delete(deletedContact);
+    public void testDeleteContactFromGroup() {
+        Contacts before = app.db().contactsInGroup();
+        GroupData group = app.db().groups().iterator().next();
+        ContactData deleteContact = before.iterator().next();
+        app.contact().deleteContactFromGroup(deleteContact, group);
         Contacts after = app.db().contacts();
-        assertEquals(after.size(), before.size() - 1);
-        assertThat(after, equalTo(before.without(deletedContact)));
-        verifyContactListInUI();
+        assertTrue(after.iterator().next().getGroups().isEmpty());
     }
 
 }
