@@ -21,7 +21,7 @@ public class AddContactToGroup extends TestBase {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("Тестовая"));
         }
-        if (app.db().contacts().size() == 0 || app.db().contactsInGroup().size() != 0) {
+        if (app.db().contacts().size() == 0 || app.db().contactsNotInGroup().size() == 0) {
             File photo = new File("src/test/resources/stru.png");
             app.contact().createContact(new ContactData().withFirstname("Сергей").withMiddlename("Александрович").withLastname("Меньшов").withCompany("Рога и копыта")
                     .withAddress("г. Москва, ул. Советская 4, офис 410").withHomePhone("253678").withMobilePhone("89456582355").withWorkPhone("554968")
@@ -35,7 +35,7 @@ public class AddContactToGroup extends TestBase {
     public void testAddContactToGroup() {
         GroupData group_before = app.db().groups().iterator().next();
         Contacts contact_before = group_before.getContacts();
-        ContactData addContact = app.db().contacts().iterator().next();
+        ContactData addContact = app.db().contactsNotInGroup().iterator().next();
         app.contact().addContactToGroup(addContact, group_before);
         GroupData group_after = app.db().groups().iterator().next();
         Contacts contact_after = group_after.getContacts();
