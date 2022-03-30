@@ -6,11 +6,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -36,18 +39,25 @@ public class ApplicationManager {
 
         dbHelper = new DBHelper();
 
-        if (browser.equals(BrowserType.CHROME)) {
-            System.setProperty("webdriver.chrome.driver", "C:/Windows/System32/chromedriver.exe");
-            wd = new ChromeDriver();
+        if ("".equals(properties.getProperty("selenium.server"))) {
+            if (browser.equals(BrowserType.CHROME)) {
+                System.setProperty("webdriver.chrome.driver", "C:/Windows/System32/chromedriver.exe");
+                wd = new ChromeDriver();
 
-        } else if (browser.equals(BrowserType.OPERA)) {
-            System.setProperty("webdriver.opera.driver", "C:/Windows/System32/operadriver.exe");
-            wd = new OperaDriver();
+            } else if (browser.equals(BrowserType.OPERA)) {
+                System.setProperty("webdriver.opera.driver", "C:/Windows/System32/operadriver.exe");
+                wd = new OperaDriver();
 
-        } else if (browser.equals(BrowserType.EDGE)) {
-            System.setProperty("webdriver.edge.driver", "C:/Windows/System32/msedgedriver.exe");
-            wd = new EdgeDriver();
+            } else if (browser.equals(BrowserType.EDGE)) {
+                System.setProperty("webdriver.edge.driver", "C:/Windows/System32/msedgedriver.exe");
+                wd = new EdgeDriver();
+            }
+        } else {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(browser);
+            wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
+
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         wd.get(properties.getProperty("web.baseUrl"));
         groupHelper = new GroupHelper(wd);
